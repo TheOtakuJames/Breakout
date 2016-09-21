@@ -1,33 +1,41 @@
 var canvas = document.getElementById("gameCanvas");
 var context = canvas.getContext("2d");
 
-//window.addEventListener('keydown', function (evt) { onKeyDown(evt);
-//},
-//false);
+window.addEventListener('keydown', function (evt) { onKeyDown(evt);
+},
+false);
 
-//var KEY_LEFT = 37;
-//var KEY_RIGHT = 39;
+var KEY_LEFT = 37;
+var KEY_RIGHT = 39;
 
-var player = document.createElement("img");
-player.src - "paddle.png";
+var paddle = document.createElement("img");
+paddle.src = "paddle.png";
 
-var positionX = 200;
-var positionY = 200;
+var positionX = 450;
+var positionY = 450;
 
-//function onKeyDown(event)
-//{
-//	if(event.keyCode == KEY_LEFT){
-//		positionX -= 1;
-//	}
-//	if(event.keyCode == KEY_RIGHT) {
-//		positionX += 1;
-//	}
-//}
+var ball = document.createElement("img");
+ball.src = "ball.png";
+
+var ballX = 450;
+var ballY = 270;
+
+function onKeyDown(event)
+{
+	if(event.keyCode == KEY_LEFT){
+		positionX -= 1;
+	}
+	if(event.keyCode == KEY_RIGHT) {
+		positionX += 1;
+	}
+}
 
 function run() {
     context.fillStyle = "#ccc";
     context.fillRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(player, positionX, positionY);
+    context.drawImage(paddle, positionX, positionY);
+    context.drawImage(ball, ballX, ballY);
+    console.log('Test');
 }
 
 //-------------------- Don't modify anything below here
