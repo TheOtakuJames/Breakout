@@ -8,11 +8,11 @@ var context = canvas.getContext("2d");
 //var KEY_LEFT = 37;
 //var KEY_RIGHT = 39;
 
-var positionX = 200;
-var positionY = 200;
-
 var player = document.createElement("img");
 player.src - "paddle.png";
+
+var positionX = 200;
+var positionY = 200;
 
 //function onKeyDown(event)
 //{
@@ -24,12 +24,10 @@ player.src - "paddle.png";
 //	}
 //}
 
-function run()
-{
-		context.fillStyle = "#ccc";
-		context.fillRect(0, 0, canvas.width, canvas.height);
-
-		context.drawImage(player, positionX, positionY);
+function run() {
+    context.fillStyle = "#ccc";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(player, positionX, positionY);
 }
 
 //-------------------- Don't modify anything below here
