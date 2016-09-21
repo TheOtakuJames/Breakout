@@ -1,41 +1,54 @@
 var canvas = document.getElementById("gameCanvas");
 var context = canvas.getContext("2d");
 
-window.addEventListener('keydown', function (evt) { onKeyDown(evt);
-},
-false);
+var startFrameMillis = Date.now();
+var endFrameMillis = Date.now();
 
-var KEY_LEFT = 37;
-var KEY_RIGHT = 39;
+// This function will return the time in seconds since the function 
+// was last called
+// You should only call this function once per frame
+function getDeltaTime() {
+    endFrameMillis = startFrameMillis;
+    startFrameMillis = Date.now();
 
-var paddle = document.createElement("img");
-paddle.src = "paddle.png";
+    // Find the delta time (dt) - the change in time since the last drawFrame
+    // We need to modify the delta time to something we can use.
+    // We want 1 to represent 1 second, so if the delta is in milliseconds
+    // we divide it by 1000 (or multiply by 0.001). This will make our 
+    // animations appear at the right speed, though we may need to use
+    // some large values to get objects movement and rotation correct
+    var deltaTime = (startFrameMillis - endFrameMillis) * 0.001;
 
-var positionX = 450;
-var positionY = 450;
+    // validate that the delta is within range
+    if (deltaTime > 1)
+        deltaTime = 1;
 
-var ball = document.createElement("img");
-ball.src = "ball.png";
+    return deltaTime;
+}
 
-var ballX = 450;
-var ballY = 270;
+var paddle = new Paddle();
+var keyboard = new Keyboard();
 
-function onKeyDown(event)
-{
-	if(event.keyCode == KEY_LEFT){
-		positionX -= 1;
-	}
-	if(event.keyCode == KEY_RIGHT) {
-		positionX += 1;
-	}
+function onKeyDown(event) {
+    if (event.keyCode == KEY_LEFT) {
+        paddle.x -= 1;
+        console.log("Bah");
+    }
+    if (event.keyCode == KEY_RIGHT) {
+        paddle.x += 1;
+    }
 }
 
 function run() {
     context.fillStyle = "#ccc";
     context.fillRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(paddle, positionX, positionY);
-    context.drawImage(ball, ballX, ballY);
-    console.log('Test');
+
+    var deltaTime = getDeltaTime();
+
+    paddle.update(deltaTime);
+    paddle.draw();
+
+    context.drawImage(ball.image, ball.x, ball.y);
 }
 
 //-------------------- Don't modify anything below here
