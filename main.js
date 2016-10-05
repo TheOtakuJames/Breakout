@@ -17,7 +17,7 @@ function getDeltaTime() {
     // we divide it by 1000 (or multiply by 0.001). This will make our 
     // animations appear at the right speed, though we may need to use
     // some large values to get objects movement and rotation correct
-    var deltaTime = (startFrameMillis - endFrameMillis) * 0.001;
+    var deltaTime = (startFrameMillis - endFrameMillis) * 5;
 
     // validate that the delta is within range
     if (deltaTime > 1)
@@ -39,15 +39,22 @@ function onKeyDown(event) {
     }
 }
 
+var block1 = document.createElement("img");
+block1.src = "Invincible_Block.png";
+
+for (var i = 0; i < 10; i++) {
+    context.drawImage(block1, 20 + ((block1.width + 2) * i), 10);
+}
+
 function run() {
-    context.fillStyle = "#ccc";
+    context.fillStyle = "#121212";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     var deltaTime = getDeltaTime();
 
     paddle.update(deltaTime);
-    paddle.draw();
 
+    context.drawImage(paddle.image, paddle.x, paddle.y);
     context.drawImage(ball.image, ball.x, ball.y);
 }
 

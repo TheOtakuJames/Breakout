@@ -17,9 +17,10 @@ Paddle.prototype.update = function(deltaTime)
 	{
 		paddle.x -= deltaTime;
 	}
-}
-Paddle.prototype.draw = function(x, y) {
-		(paddle.x, paddle.y);
 }
+
+//Paddle.prototype.draw = function(x, y) {
+//		(paddle.x, paddle.y);
+//}
 
 var paddle = new Paddle();
