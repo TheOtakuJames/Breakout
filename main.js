@@ -17,11 +17,10 @@ function getDeltaTime() {
     // we divide it by 1000 (or multiply by 0.001). This will make our 
     // animations appear at the right speed, though we may need to use
     // some large values to get objects movement and rotation correct
-    var deltaTime = (startFrameMillis - endFrameMillis) * 5;
+    var deltaTime = (startFrameMillis - endFrameMillis) * 0.5;
 
     // validate that the delta is within range
-    if (deltaTime > 1)
-        deltaTime = 1;
+
 
     return deltaTime;
 }
@@ -39,6 +38,10 @@ function onKeyDown(event) {
     }
 }
 
+function rand(floor, ceil) {
+    return Math.floor((Math.random() * (ceil - floor)) + floor);
+}
+
 var block1 = document.createElement("img");
 block1.src = "Invincible_Block.png";
 
@@ -46,9 +49,32 @@ for (var i = 0; i < 10; i++) {
     context.drawImage(block1, 20 + ((block1.width + 2) * i), 10);
 }
 
+var speed = 5;
+
+function spawnBall()
+{
+    var x = canvas.width / 2;
+    var y = canvas.height / 2;
+
+    var dirX = rand(-10, 10);
+    var dirY = rand(-10, 10);
+
+    var movX = dirX * canvas.width;
+    var movY = dirY * canvas.height;
+
+    ball.x = x + movX;
+    ball.y = y + movY;
+
+    ball.velocityX = -dirX * speed;
+    ball.velocityY = -dirY * speed;
+
+}
+
 function run() {
     context.fillStyle = "#121212";
     context.fillRect(0, 0, canvas.width, canvas.height);
+
+    spawnBall;
 
     var deltaTime = getDeltaTime();
 

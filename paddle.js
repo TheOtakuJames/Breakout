@@ -15,15 +15,12 @@ Paddle.prototype.update = function(deltaTime)
 	}
 	if(keyboard.isKeyDown(keyboard.KEY_LEFT) == true)
 	{
-		paddle.x -= deltaTime;
-	}
-}
+	    paddle.x -= deltaTime;
+	    if (paddle.x < 0) {
 
-function moveRight() {
-    var parentWidth = image.parentNode.offsetWidth;
-    if (parseInt(image.style.left) + image.offsetWidth < parentWidth) {
-        image.style.left = parseInt(image.style.left, 10) + 10 + 'px';
-    }
+	    }
+
+	}
 }
 
 //Paddle.prototype.draw = function(x, y) {
