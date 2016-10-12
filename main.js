@@ -45,36 +45,39 @@ function rand(floor, ceil) {
 var block1 = document.createElement("img");
 block1.src = "Invincible_Block.png";
 
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < block1.length; i++) {
     context.drawImage(block1, 20 + ((block1.width + 2) * i), 10);
 }
 
-var speed = 5;
+var speed = 2;
 
 function spawnBall()
 {
-    var x = canvas.width / 2;
-    var y = canvas.height / 2;
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
 
-    var dirX = rand(-10, 10);
-    var dirY = rand(-10, 10);
-
-    var movX = dirX * canvas.width;
-    var movY = dirY * canvas.height;
-
-    ball.x = x + movX;
-    ball.y = y + movY;
+    var dirX = rand(-2, 2);
+    var dirY = rand(-2, 2);
 
     ball.velocityX = -dirX * speed;
     ball.velocityY = -dirY * speed;
+}
 
+spawnBall();
+
+function moveBall() {
+    var movX = ball.velocityX;
+    var movY = ball.velocityY;
+
+    ball.x = ball.x + movX;
+    ball.y = ball.y + movY;
 }
 
 function run() {
     context.fillStyle = "#121212";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    spawnBall;
+    moveBall();
 
     var deltaTime = getDeltaTime();
 
