@@ -19,6 +19,13 @@ Paddle.prototype.update = function(deltaTime)
 	}
 }
 
+function moveRight() {
+    var parentWidth = image.parentNode.offsetWidth;
+    if (parseInt(image.style.left) + image.offsetWidth < parentWidth) {
+        image.style.left = parseInt(image.style.left, 10) + 10 + 'px';
+    }
+}
+
 //Paddle.prototype.draw = function(x, y) {
 //		(paddle.x, paddle.y);
 //}
