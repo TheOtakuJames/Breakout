@@ -43,11 +43,16 @@ function rand(floor, ceil) {
 }
 
 var block1 = document.createElement("img");
-block1.src = "Invincible_Block.png";
+block1.src = "Invicible_Block_V2.png";
 
-for (var i = 0; i < block1.length; i++) {
-    context.drawImage(block1, 20 + ((block1.width + 2) * i), 10);
-}
+var block2 = document.createElement("img");
+block2.src = "Super_Strong_Block.png";
+
+var block3 = document.createElement("img");
+block3.src = "Strong_Block.png";
+
+var block4 = document.createElement("img");
+block4.src = "Weak_Block.png";
 
 var speed = 2;
 
@@ -73,6 +78,19 @@ function moveBall() {
     ball.y = ball.y + movY;
 }
 
+for (var i = 0; i < paddle.length; i++) {
+    for (var j = 0; j < ball.length; j++) {
+        if (intersects(
+        ball[j].x - ball[j].width / 2, ball[j].y - ball[j].height / 2,
+        ball[j].width, ball[j].height,
+        paddle[i].x - paddle[i].width / 2, paddle[i].y - paddle[i].height / 2,
+            paddle[i].width, paddle[i].height) == true) {
+            moveBall();
+        }
+    }
+
+}
+
 function run() {
     context.fillStyle = "#121212";
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -80,6 +98,22 @@ function run() {
     moveBall();
 
     var deltaTime = getDeltaTime();
+
+    for (var i = 0; i < 9; i++) {
+        context.drawImage(block1, 10 + ((block1.width + 2) * i), 10);
+    }
+
+    for (var i = 0; i < 9; i++) {
+        context.drawImage(block2, 10 + ((block2.width + 2) * i), 50);
+    }
+
+    for (var i = 0; i < 9; i++) {
+        context.drawImage(block3, 10 + ((block3.width + 2) * i), 90);
+    }
+
+    for (var i = 0; i < 9; i++) {
+        context.drawImage(block4, 10 + ((block4.width + 2) * i), 130);
+    }
 
     paddle.update(deltaTime);
 
