@@ -89,8 +89,6 @@ function moveBall() {
     ball.y = ball.y + movY;
 }
 
-
-
 function run() {
     var blueprint_background = new Image();
     blueprint_background.src = 'Space_Background.png';
@@ -117,14 +115,28 @@ function run() {
                 ball.velocityY = -ball.velocityY;
             }
         }
-        if (ball.x < 0 || ball.x > canvas.width || ball.y < 0 || ball.y > canvas.height) {
+        if (ball.y > canvas.height) {
+            ball.isDead = true;
+        }
+        if (ball.x < 0) {
             ball.velocityX = -ball.velocityX;
+        }
+        if (ball.y < 0) {
             ball.velocityY = -ball.velocityY;
+        }
+        if (ball.x > canvas.width) {
+            ball.velocityX = -ball.velocityX;
         }
     }
 
+    if (ball.isDead == true) {
+        context.fillStyle = "#F0FFFF";
+        context.font = "110px Arial";
+        context.fillText("GAME OVER", 100, canvas.height / 2);
+    }
     var deltaTime = getDeltaTime();
 
+    if(ball.isDead == false){
     for (var i = 0; i < 9; i++) {
         context.drawImage(block1, 10 + ((block1.width + 2) * i), 10);
     }
@@ -140,11 +152,11 @@ function run() {
     for (var i = 0; i < 9; i++) {
         context.drawImage(block4, 10 + ((block4.width + 2) * i), 130);
     }
-
-    paddle.update(deltaTime);
-
-    context.drawImage(paddle.image, paddle.x, paddle.y);
-
+}
+    if (ball.isDead == false) {
+        paddle.update(deltaTime);
+        context.drawImage(paddle.image, paddle.x, paddle.y);
+    }
 }
 
 //-------------------- Don't modify anything below here

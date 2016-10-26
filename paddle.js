@@ -1,13 +1,13 @@
 var Paddle = function() {
 	this.image = document.createElement("img");
 	this.x = 450;
-	this.y = 450;
+	this.y = 550;
 	this.velocityX = 0;
 	this.velocityY = 0;
 	this.image.src = "paddle.png";
 	this.isDead = false;
 	this.height = 32;
-	this.width = 32;
+	this.width = 128;
 };
 
 Paddle.prototype.update = function(deltaTime)
