@@ -42,6 +42,17 @@ function rand(floor, ceil) {
     return Math.floor((Math.random() * (ceil - floor)) + floor);
 }
 
+function intersects(x1, y1, w1, h1, x2, y2, w2, h2) {
+    if (y2 + h2 < y1 ||
+    x2 + w2 < x1 ||
+    x2 > x1 + w1 ||
+    y2 > y1 + h1) {
+        return false;
+    }
+    return true;
+}
+
+
 var block1 = document.createElement("img");
 block1.src = "Invicible_Block_V2.png";
 
@@ -78,24 +89,39 @@ function moveBall() {
     ball.y = ball.y + movY;
 }
 
-for (var i = 0; i < paddle.length; i++) {
-    for (var j = 0; j < ball.length; j++) {
-        if (intersects(
-        ball[j].x - ball[j].width / 2, ball[j].y - ball[j].height / 2,
-        ball[j].width, ball[j].height,
-        paddle[i].x - paddle[i].width / 2, paddle[i].y - paddle[i].height / 2,
-            paddle[i].width, paddle[i].height) == true) {
-            moveBall();
-        }
-    }
 
-}
 
 function run() {
-    context.fillStyle = "#121212";
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    var blueprint_background = new Image();
+    blueprint_background.src = 'Space_Background.png';
+    blueprint_background.onload = function () {
+        var pattern = context.createPattern(this, "repeat");
+        context.fillStyle = pattern;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
     moveBall();
+
+    if (ball.isDead == false) {
+        ball.x += ball.velocityX;
+        ball.y += ball.velocityY;
+        context.drawImage(ball.image, ball.x, ball.y);
+
+        if (paddle.isDead == false) {
+            var hit = intersects(
+                           ball.x, ball.y,
+                           ball.width, ball.height,
+                           paddle.x, paddle.y,
+                           paddle.width, paddle.height);
+            if (hit == true) {
+                ball.velocityY = -ball.velocityY;
+            }
+        }
+        if (ball.x < 0 || ball.x > canvas.width || ball.y < 0 || ball.y > canvas.height) {
+            ball.velocityX = -ball.velocityX;
+            ball.velocityY = -ball.velocityY;
+        }
+    }
 
     var deltaTime = getDeltaTime();
 
@@ -118,7 +144,7 @@ function run() {
     paddle.update(deltaTime);
 
     context.drawImage(paddle.image, paddle.x, paddle.y);
-    context.drawImage(ball.image, ball.x, ball.y);
+
 }
 
 //-------------------- Don't modify anything below here

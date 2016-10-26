@@ -5,6 +5,9 @@ var Paddle = function() {
 	this.velocityX = 0;
 	this.velocityY = 0;
 	this.image.src = "paddle.png";
+	this.isDead = false;
+	this.height = 32;
+	this.width = 32;
 };
 
 Paddle.prototype.update = function(deltaTime)
