@@ -1,0 +1,8 @@
+https://docs.google.com/document/d/1kB0NEVTRl-ozXpZ0s4G_znU2rRPoP9S3YnmCm-06O50/edit?usp=sharing
+Here's our design document
+
+So originally this was going to be a Breakout game, but it turned out being a Pong type game.
+You move the top bar with A and D, and the bottom with the Left and Right Arrow Keys.
+The core mechanic is that you don't want to die - by reaching the bottom or the top.
+Ben did all of the artwork you see, along with code for collisions and various other things.
+I did code for movement, spawning, and other things - I think we worked well together as a team!
